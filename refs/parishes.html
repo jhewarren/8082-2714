@@ -1,0 +1,618 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+	<head>
+		<!--meta name="viewport" content="user-scalable=yes, initial-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" /-->
+		<!--meta name="viewport" content="user-scalable=no,initial-scale=1, maximum-scale=1, minimum-scale=1" /-->
+		<meta name="viewport" content="user-scalable=yes,initial-scale=1, minimum-scale=1" />
+		
+		<meta id="touch-event-mode" content="native"/>
+		<meta charset='utf-8' />
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame 
+		Remove this if you use the .htaccess -->
+		<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' />
+	    <title>Vancouver and Area Churches</title>
+	    <!--script src="http://code.jquery.com/jquery-1.7.2.min.js"></script-->
+	    <!--script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script-->
+		<script type="text/javascript" charset="utf-8">
+
+			// Wait for device API libraries to load
+			//
+			function onLoad() {
+				// document.addEventListener("deviceready", onDeviceReady, false);
+				showSplash();
+			}
+
+			// device APIs are available
+			//
+//			function onDeviceReady() {
+//				// Register the event listener
+//				document.addEventListener("backbutton", showMain, false);
+//			}
+			function openExt(elem){
+				window.open(elem.href,"_system",location="yes")
+			}
+
+		</script>	
+		<style>
+			/*
+			dnwgold: #d6af11
+			dnwblue: #143282
+			*/
+
+			body{
+				background-color: #d3d3d3;
+				/*
+				background-image: url(media/gradient.png);
+				*/
+				background-size:100% 100%;
+				background-repeat:no-repeat; 
+				background-attachment:fixed;
+				font-family:Verdana, Geneva, sans-serif}
+			.button{
+				color: #d6af11;
+				background-color:#143282; 
+				text-align:left; 
+				padding: 2px 5px;
+				height:30px;
+				font-size:10pt;
+			    display: inline;
+                border: 1px dotted #d6af11;
+			}
+			.xbutt{background-color:#4f78e4; color: #fdf9e9; text-decoration: line-through; }
+			table{table-layout:fixed;}
+			th,td{overflow:hidden;padding: 1px; border: 1px dotted gray;}
+			thead{background-color: #2f2f8f;color: #d6af11;}
+			a {font-style:italic; color: #143282;}
+			#tName, #tNeigh {display:table-cell;text-align:left;white-space: nowrap; }
+			#tAddr, #tClerg,#tDean,#tArch{text-align:left;white-space: nowrap;display:none;max-width:90%}
+			#header{height:10%;display:none;}
+			div.banner{width:75%; padding:0% 5% 0% 5%;float:left;content:url("media/banner.png")}
+			div.menu{width: 25%; padding: 5% 0% 5% 0%;float:right;}
+			#socialrow{display:block; text-align:right; float:right;}
+			#socialcol{float:right;}
+			#results, #filters, #arch-dean{display: block;} 
+			#details, #control{font-size:10pt;display: none;}
+			#content{top:18%;}
+			#main, #foot{
+				position:absolute;
+				 width:300px;
+				 height:70%px;
+				 z-index:15;
+				 top:32%;
+				 left:50%;
+				 margin:-100px 0 0 -130px;
+				 }
+			a.btn0{font-size:20px;font-family: Arial; font-style:bold;color:black;;text-decoration:none; text-transform:capitalize; left:20px;}
+			#foot{top:90%;text-align:center; font-size:16px; font-style:italic;position:absolute;}
+			.splash{
+				position:absolute;
+				top:10%;
+				text-align:center;	
+				font-size:36px;
+				font-family:Arial;
+				font-style:bold;
+				color:black;
+				text-decoration:none; 
+				text-transform:capitalize;
+			}
+			.splash *{font-size:36pt;}	
+			#footer {top:90%;right:2%;position:absolute;display:none;text-align:right;font-size:10pt;font-style:italic;}
+			#credit{}
+			#tile{width:45px; margin:15%;}
+
+			@media (max-width: 300px) {
+				#tName {width:70%;}
+				#tNeigh {width:30%;}
+				#splash{font-size: 12pt;}
+				a.btn0{font-size: 12pt;}
+			}
+
+			@media (min-width: 500px) {
+				#tName{width:70%;}
+				#tNeigh{width:30%;}
+				#details{font-size: 14pt;}
+				.button{font-size: 12pt;}
+				a.btn0{font-size: 16pt;}
+			}
+			@media (min-width: 700px) {
+				#tName{width:40%;}
+				#tNeigh{width:20%;}
+				#tClerg{display:table-cell;width:40%}
+				#splash{font-size: 48pt;}			
+				#details{font-size: 24pt;}
+				a.btn0{font-size: 36pt;}
+			}
+
+			@media (min-width: 1000px) {
+				#tName{width:25%;}
+				#tNeigh{width:10%;}
+				#tAddr{display:table-cell;width:45%;}
+				#tClerg{display:table-cell;width:20%;}
+				#splash{font-size: 64pt;}
+				#details{font-size: 24pt;}
+				a.btn0{font-size: 48pt;}
+			}
+
+		</style>
+
+	</head>
+	<body onload="onLoad()">
+		<!--button ontouchend="showLocation()" onclick="showLocation()">Location</button>
+			<button ontouchend="showNews()" onclick="showNews()">News</button>
+			<button ontouchend="showEvents()" onclick="showEvents()">Events</button>
+		</div-->
+		<div id='header'>
+			<div class='banner'></div>
+				<a href="#" onclick="showMain()">
+					<img width='15%' top='10px' src='media/home0.png'/><br />
+				</a>
+			</div>
+		</div>
+		<div id="control">
+			<table><tr>
+			<td  width='95%'>
+			<div id='filters'>
+				<p><input type='text' id='name' placeholder='Enter Partial Parish Name...' style='width:225px;' onkeyup='filterList("name",this.value)' ontouchend='filterList("name",this.value)'/>
+				<a href="http://maps.google.com/maps?q=http:%2F%2Fmaps.google.com%2Fmaps%2Fms%3Fauthuser%3D0%26vps%3D1%26ie%3DUTF8%26msa%3D0%26output%3Dkml%26msid%3D218035367951528156592.0004a8ebe9c0a00c79f4e&hl=en&ll=49.3931,-122.585449&spn=0.98679,2.469177&sll=49.23992,-123.14419&sspn=0.123732,0.308647&vpsrc=6&z=9" target="_system">Display map</a></p>
+				<select name='cities' id='cities' onclick='filterList("city",this.value)' onchange='filterList("city",this.value)' >
+					<option selected='selected' value=''>Select a City</option>
+					<option value='Abbotsford'>Abbotsford</option>
+					<option value='Agassiz'>Agassiz</option>
+					<option value='Aldergrove'>Aldergrove</option>
+					<option value='Burnaby'>Burnaby</option>
+					<option value='Chilliwack'>Chilliwack</option>
+					<option value='Coquitlam'>Coquitlam</option>
+					<option value='Delta'>Delta</option>
+					<option value='Fort Langley'>Fort Langley</option>
+					<option value='Gibsons'>Gibsons</option>
+					<option value='Hope'>Hope</option>
+					<option value='Langley'>Langley</option>
+					<option value='Maple Ridge'>Maple Ridge</option>
+					<option value='Mission'>Mission</option>
+					<option value='New Westminster'>New Westminster</option>
+					<option value='North Vancouver'>North Vancouver</option>
+					<option value='Pitt Meadows'>Pitt Meadows</option>
+					<option value='Port Coquitlam'>Port Coquitlam</option>
+					<option value='Port Moody'>Port Moody</option>
+					<option value='Powell River'>Powell River</option>
+					<option value='Richmond'>Richmond</option>
+					<option value='Sardis'>Sardis</option>
+					<option value='Sechelt'>Sechelt</option>
+					<option value='Surrey'>Surrey</option>
+					<option value='Vancouver'>Vancouver</option>
+					<option value='West Vancouver'>West Vancouver</option>
+					<option value='White Rock'>White Rock</option>
+					<option value='Diocese'>Diocese</option>
+				</select>
+				<select name='clergy' id='clergy' onclick='filterList("clergy",this.value)' onchange='filterList("clergy",this.value)'>
+					<option selected='selected' value=''>Select Clergy</option>
+					<option value="The Most Rev. Douglas Hambidge">The Most Rev. Douglas Hambidge</option>
+					<option value="The Rev. Al Hoskings">The Rev. Al Hoskings</option>
+					<option value="The Rev. Alisdair Smith">The Rev. Alisdair Smith</option>
+					<option value="The Rev. Allan Carson">The Rev. Allan Carson</option>
+					<option value="The Rev. Andrew Wilhelm-Boyles">The Rev. Andrew Wilhelm-Boyles</option>
+					<option value="The Rev. Anne Anchor">The Rev. Anne Anchor</option>
+					<option value="The Rev. Brian Vickers">The Rev. Brian Vickers</option>
+					<option value="The Rev. Brock Lupton">The Rev. Brock Lupton</option>
+					<option value="The Rev. Bruce Morris">The Rev. Bruce Morris</option>
+					<option value="The Rev. Bryan Rivers">The Rev. Bryan Rivers</option>
+					<option value="The Rev. Canon Harold Munn">The Rev. Canon Harold Munn</option>
+					<option value="The Rev. Carla McGhie">The Rev. Carla McGhie</option>
+					<option value="The Rev. Charles Balfour">The Rev. Charles Balfour</option>
+					<option value="The Rev. Christine Rowe">The Rev. Christine Rowe</option>
+					<option value="The Rev. Christine Wilson">The Rev. Christine Wilson</option>
+					<option value="The Rev. Clarence Li">The Rev. Clarence Li</option>
+					<option value="The Rev. Craig Vance">The Rev. Craig Vance</option>
+					<option value="The Rev. Daebin Moses Im">The Rev. Daebin Moses Im</option>
+					<option value="The Rev. David Price">The Rev. David Price</option>
+					<option value="The Rev. Denise Doerksen">The Rev. Denise Doerksen</option>
+					<option value="The Rev. Donna Kirkpatrick">The Rev. Donna Kirkpatrick</option>
+					<option value="The Rev. Dr. Adela Torchia">The Rev. Dr. Adela Torchia</option>
+					<option value="The Rev. Dr. Alain-Michel Rocheleau">The Rev. Dr. Alain-Michel Rocheleau</option>
+					<option value="The Rev. Dr. Angus Stuart">The Rev. Dr. Angus Stuart</option>
+					<option value="The Rev. Dr. E.J. (Ted) Celiz">The Rev. Dr. E.J. (Ted) Celiz</option>
+					<option value="The Rev. Dr. Marilyn Hames">The Rev. Dr. Marilyn Hames</option>
+					<option value="The Rev. Dr. Paula Sampson">The Rev. Dr. Paula Sampson</option>
+					<option value="The Rev. Dr. Richard Leggett">The Rev. Dr. Richard Leggett</option>
+					<option value="The Rev. Eileen Nurse">The Rev. Eileen Nurse</option>
+					<option value="The Rev. Elizabeth Mathers">The Rev. Elizabeth Mathers</option>
+					<option value="The Rev. Elizabeth Northcott">The Rev. Elizabeth Northcott</option>
+					<option value="The Rev. Emilie Smith">The Rev. Emilie Smith</option>
+					<option value="The Rev. Eric Lowe">The Rev. Eric Lowe</option>
+					<option value="The Rev. Expedito Farinas">The Rev. Expedito Farinas</option>
+					<option value="The Rev. Faun H. Harriman">The Rev. Faun H. Harriman</option>
+					<option value="The Rev. G. Welby Walker">The Rev. G. Welby Walker</option>
+					<option value="The Rev. Gail Newell">The Rev. Gail Newell</option>
+					<option value="The Rev. Gary Hamblin">The Rev. Gary Hamblin</option>
+					<option value="The Rev. Georgina Harris">The Rev. Georgina Harris</option>
+					<option value="The Rev. Glen Nicholson">The Rev. Glen Nicholson</option>
+					<option value="The Rev. Gordon Shields">The Rev. Gordon Shields</option>
+					<option value="The Rev. Heidi Brear">The Rev. Heidi Brear</option>
+					<option value="The Rev. Helen Tervo">The Rev. Helen Tervo</option>
+					<option value="The Rev. Helen Worley">The Rev. Helen Worley</option>
+					<option value="The Rev. Ian Nestegaard Paul">The Rev. Ian Nestegaard Paul</option>
+					<option value="The Rev. James McCullum">The Rev. James McCullum</option>
+					<option value="The Rev. Jeremy Clark-King">The Rev. Jeremy Clark-King</option>
+					<option value="The Rev. John Firmston">The Rev. John Firmston</option>
+					<option value="The Rev. John Marsh">The Rev. John Marsh</option>
+					<option value="The Rev. John Marsh">The Rev. John Marsh</option>
+					<option value="The Rev. John Sovereign">The Rev. John Sovereign</option>
+					<option value="The Rev. Ka Hyun Mackenzie Shin">The Rev. Ka Hyun Mackenzie Shin</option>
+					<option value="The Rev. Karen Saunders">The Rev. Karen Saunders</option>
+					<option value="The Rev. Karl Przywala">The Rev. Karl Przywala</option>
+					<option value="The Rev. Katherine Yeo">The Rev. Katherine Yeo</option>
+					<option value="The Rev. Keith Gilbert">The Rev. Keith Gilbert</option>
+					<option value="The Rev. Kim Prokopchuk">The Rev. Kim Prokopchuk</option>
+					<option value="The Rev. Larry Adkins">The Rev. Larry Adkins</option>
+					<option value="The Rev. Laurel Dykstra">The Rev. Laurel Dykstra</option>
+					<option value="The Rev. Leonard Dyer">The Rev. Leonard Dyer</option>
+					<option value="The Rev. Linda St. Clair">The Rev. Linda St. Clair</option>
+					<option value="The Rev. Linda Varin">The Rev. Linda Varin</option>
+					<option value="The Rev. Lizz Lindsay">The Rev. Lizz Lindsay</option>
+					<option value="The Rev. Luisito (Louie) Engnan">The Rev. Luisito (Louie) Engnan</option>
+					<option value="The Rev. Margaret Cole">The Rev. Margaret Cole</option>
+					<option value="The Rev. Margaret Cornish">The Rev. Margaret Cornish</option>
+					<option value="The Rev. Marnie Peterson">The Rev. Marnie Peterson</option>
+					<option value="The Rev. Michael Batten">The Rev. Michael Batten</option>
+					<option value="The Rev. Neil Gray">The Rev. Neil Gray</option>
+					<option value="The Rev. Patrick Blaney">The Rev. Patrick Blaney</option>
+					<option value="The Rev. Paul Borthistle">The Rev. Paul Borthistle</option>
+					<option value="The Rev. Paul Bowie">The Rev. Paul Bowie</option>
+					<option value="The Rev. Paul Illical">The Rev. Paul Illical</option>
+					<option value="The Rev. Paul Woehrle">The Rev. Paul Woehrle</option>
+					<option value="The Rev. Paula Porter Leggett">The Rev. Paula Porter Leggett</option>
+					<option value="The Rev. Paulina Lee">The Rev. Paulina Lee</option>
+					<option value="The Rev. Pitman Potter">The Rev. Pitman Potter</option>
+					<option value="The Rev. Roberta Fraser">The Rev. Roberta Fraser</option>
+					<option value="The Rev. Ron Wickens">The Rev. Ron Wickens</option>
+					<option value="The Rev. Ruth Taylor">The Rev. Ruth Taylor</option>
+					<option value="The Rev. Scott Gould">The Rev. Scott Gould</option>
+					<option value="The Rev. Shirley Stockdill">The Rev. Shirley Stockdill</option>
+					<option value="The Rev. Stephanie Shepard">The Rev. Stephanie Shepard</option>
+					<option value="The Rev. Stephen Bailey">The Rev. Stephen Bailey</option>
+					<option value="The Rev. Stephen Muir">The Rev. Stephen Muir</option>
+					<option value="The Rev. Steve Thompson">The Rev. Steve Thompson</option>
+					<option value="The Rev. Stuart Isto">The Rev. Stuart Isto</option>
+					<option value="The Rev. Trevor Fisher">The Rev. Trevor Fisher</option>
+					<option value="The Rev. Trudi Shaw">The Rev. Trudi Shaw</option>
+					<option value="The Rev. Wally Shea">The Rev. Wally Shea</option>
+					<option value="The Rev. Walter Bayley">The Rev. Walter Bayley</option>
+					<option value="The Rev. William Roberts">The Rev. William Roberts</option>
+					<option value="The Rev. Wilmer Toyoken">The Rev. Wilmer Toyoken</option>
+					<option value="The Rev. Jennifer Burgoyne">The Rev. Jennifer Burgoyne</option>
+					<option value="The Rev. Andrew Halladay">The Rev. Andrew Halladay</option>
+					<option value="The Rev. Brother John Blyth">The Rev. Brother John Blyth</option>
+					<option value="The Rev. Christine Magrega">The Rev. Christine Magrega</option>
+					<option value="The Rev. Craig Tanksley">The Rev. Craig Tanksley</option>
+					<option value="The Rev. Dale Yardy">The Rev. Dale Yardy</option>
+					<option value="The Rev. Dixie Black">The Rev. Dixie Black</option>
+					<option value="The Rev. Father Mark Greenaway-Robbins">The Rev. Father Mark Greenaway-Robbins</option>
+					<option value="The Rev. Father Matthew Johnson">The Rev. Father Matthew Johnson</option>
+					<option value="The Rev. Father Michael Forshaw">The Rev. Father Michael Forshaw</option>
+					<option value="The Rev. Father Michael Fuller">The Rev. Father Michael Fuller</option>
+					<option value="The Rev. Fr. Allen Doerksen">The Rev. Fr. Allen Doerksen</option>
+					<option value="The Rev. Gordon Dominey">The Rev. Gordon Dominey</option>
+					<option value="The Rev. Jessica Schaap">The Rev. Jessica Schaap</option>
+					<option value="The Rev. Michael McGee">The Rev. Michael McGee</option>
+					<option value="The Rev. Mother Alexis Saunders">The Rev. Mother Alexis Saunders</option>
+					<option value="The Rev. Vivian Lam">The Rev. Vivian Lam</option>
+					<option value="The Ven. Dr. Ellen Clark-King">The Ven. Dr. Ellen Clark-King</option>
+					<option value="The Ven. Dr. John A "Ian" MacKenzie">The Ven. Dr. John A "Ian" MacKenzie</option>
+					<option value="The Ven. Stephen Rowe">The Ven. Stephen Rowe</option>
+					<option value="The Venerable Grant Rodgers">The Venerable Grant Rodgers</option>
+					<option value="The Venerable John Stephens">The Venerable John Stephens</option>
+					<option value="The Venerable Lynne McNaughton">The Venerable Lynne McNaughton</option>
+					<option value="The Very Rev. Peter Elliott">The Very Rev. Peter Elliott</option>
+				</select>
+				<select name='archdeaconries' id='archdeaconries' onclick='filterList("arch",this.value)' onchange='filterList("arch",this.value)'>
+					<!--option selected='selected' value=''>Select an Archdeaconry</option-->
+					<option selected='selected' value=''>Select an Area/Region</option>
+					<option value='Burrard'>Downtown & East Side</option>
+					<option value='Capilano'>Capilano & Sunshine Coast</option>
+					<option value='Fraser'>South Fraser/Fraser Valley</option>
+					<option value='Lougheed'>North Fraser/Lougheed</option>
+					<option value='Vancouver'>Vancouver West</option>
+					<option value='Westminster'>Burnaby South & New Westminster</option>			
+					<option value='South'>Richmond & Delta</option>			
+				</select>
+				<!--select name='deaneries' id='deaneries' onclick='filterList("dean",this.value)' onchange='filterList("dean",this.value)'>
+					<option selected='selected' value=''>Select a Deanery</option>
+						<option value="Valley">Valley</option>
+						<option value="Royal City – South Burnaby">Royal City – South Burnaby</option>
+						<option value="Richmond - Delta">Richmond - Delta</option>
+						<option value="Golden Ears">Golden Ears</option>
+						<option value="Hastings">Hastings</option>
+						<option value="Peace Arch">Peace Arch</option>
+						<option value="Kingsway">Kingsway</option>
+						<option value="Granville">Granville</option>
+						<option value="North Vancouver">North Vancouver</option>
+						<option value="Point Grey">Point Grey</option>
+						<option value="Sea to Sky">Sea to Sky</option>
+						<option value="Tri-Cities - North Burnaby">Tri-Cities - North Burnaby</option>
+				</select-->
+			</div>
+			</td>
+			<!--td width='5%'><img src='media/logo.png' width='50px'/></td-->
+		</tr></table>
+		</div>
+		<div id="content"></div>
+		<div id="footer"><a href="mailto:support@digizee.com?xref=dnw&subject=Feedback<<dnw>>"><img height="30px" src="media/email0.png"/></a>&nbsp;&nbsp;<a target='_blank' href="http://digizee.com"><img src="media/digizee.png" width="35px"/></a></div>
+		<script>
+			// Name/parish, City/area, Priest/clergy, Deanery, Archdeaconry
+			var nFilter=cFilter=pFilter=dFilter=aFilter=html="";
+			// name/parish, city/area, address, priest/clergy, deanery, archdeaconry, 
+			//phone, email, url, fb, twitter, rss, media, services
+			var parishInfo=[
+				["All Saints","Agassiz","6904 No. 9 Highway, Agassiz, BC, Canada, V0M 1A1","Priest-in-charge - The Rev. David Price","Valley","Fraser","www.allsaints-agassiz.ca/","604-796-3553","revdave@shaw.ca","http://www.facebook.com/pages/Anglican-Church-of-All-Saints-in-Agassiz-BC-Canada/184310624916399","","http://allsaints-agassiz.ca/?feed=rss2","","Sunday 10am: Eucharist<br />Matins","49.241939","-121.768879",""],
+				["All Saints","Burnaby","7405 Royal Oak Avenue, Burnaby, BC, Canada, V5J 4J8","Priest-in-Charge - The Rev. Shirley Stockdill","Royal City – South Burnaby","Westminster","www.allsaintsburnaby.ca","604-433-0815","","","","","","Sunday 8am Spoken Eucharist BCP<br />Sunday 10am Eucharist with music BAS","49.21660","-122.98889",""],
+				["All Saints","Ladner","4755 Arthur Drive, Delta, BC, Canada, V4K 2X6","Incumbent - The Rev. Elizabeth Northcott<br />Honorary Assistant - The Most Rev. Douglas Hambidge<br /><hr>Administrator - Flower Pearson","Richmond - Delta","Westminster","www.allsaintsladner.org","604-946-8413","allsaints@dccnet.com","","","","","Sunday 8:30am Holy Communion<br />Sunday 10am Family Eucharist<br />Wednesday 10am Holy Communion","49.08957","-123.0819",""],
+				["All Saints","Mission","33077 - 2 Avenue, Mission, BC, Canada, V2V 1J7","Incumbent - The Rev. Paul Bowie<br />Deacon - The Rev. Glen Nicholson<br /><hr>Parish Secretary - Mrs. Elizabeth Johns","Golden Ears","Lougheed","allsaintsmission.webs.com","604-826-2814","allsaints_mission@shaw.ca","https://www.facebook.com/allsaintsmission","","http://allsaintsmission.webs.com/apps/blog/entries/feed<br />ss","","Sunday 8am Holy Eucharist BCP<br />Sunday 10am Holy Eucharist","49.135367","-122.307268",""],
+				["Christ Church","Hope","Box 1421, 681 Fraser Avenue, Hope, BC, Canada, V0X 1L0","Priest-in-Charge - The Rev. Gail Newell<br /><hr>Parish Secretary - Darla Dickenson","Valley","Fraser","www.anglican-hope.ca","604-869-5402","anglican-hope@uniserve.com","","","","","Sunday 10am","49.379810","-121.443618",""],
+				["Christ Church Cathedral","Vancouver","690 Burrard Street, Vancouver, BC, Canada, V6C 2L1","Dean and Rector - The Very Rev. Peter Elliott<br />Cathedral Vicar - The Ven. Dr. Ellen Clark-King<br />Priest Associate - The Rev. Marnie Peterson<br />Deacon - The Rev. Dixie Black<br />Deacon - The Rev. Alisdair Smith<br />Hon. Assistant Priest - The Rev. Helen Worley<br />Hon. Assistant Priest - The Rev. James McCullum<br />Hon. Assistant Priest - The Rev. Linda St. Clair<br /><hr>Director of Development - Mark Munn<br />Administrator - Mr. Vincent Carey","Hastings","Burrard","www.cathedral.vancouver.bc.ca","604-682-3848","office@cathedral.vancouver.bc.ca","http://www.facebook.com/ChristChurchCathedralChoirVancouver","http://twitter.com/@CCCVancouver","http://www.cathedral.vancouver.bc.ca/feed/","http://www.youtube.com/user/VancouverCathedral","Sunday 8:00AM Holy Eucharist<br />Sunday 10:30AM Parish Eucharist<br />Sunday 9:30PM Gregorian Chant<br />Compline<br />MON-FRI: 12:10PM Holy Communion<br />THURS: 7:30AM Eucharist<br />THURS: 12:10PM Eucharist with Healing Prayers<br />SAT: 9:10AM Holy Communion","49.284520","-123.12039",""],
+				["Christ the Redeemer","Cloverdale","16613 57A Avenue, Surrey, BC, Canada, V3S 1K4","Incumbent - The Rev. Craig Vance<br /><hr>Parish Secretary - Ms. Martha Glassford","Peace Arch","Fraser","www.ctrchurch.com","604-576-2216"," ","https://www.facebook.com/pages/Christ-the-Redeemer-Anglican-Church/65692421556","","http://ctrchurch.com/church/feed/","","Sunday 8:30 am - Holy Eucharist (BCP)<br />Sunday 10:00 am - Holy Eucharist (BAS)<br />Thursday 9:15 am - Morning Prayer<br />1st Saturday 4:30 pm - Messy Church<br />","49.107369","-122.761278",""],
+				["Church of the Epiphany","Surrey","10553 148th Street, Surrey, BC, Canada, V3R 3X7","Incumbent - The Ven. Stephen Rowe<br />Hon. Assistant Priest - The Rev. G. Welby Walker<br />Deacon - The Rev. Leonard Dyer","Peace Arch","Fraser","www.epiphanysry.org","604-588-4511",,"","","","","Sunday 10:30am Holy Eucharist<br />Wednesday 7:00pm Holy Eucharist","49.193976","-122.812459",""],
+				["Church of the Holy Spirit","Whonnock","27123 River Rd., Maple Ridge, BC V2W1M4","Priest In Charge - The Rev. Dr. E.J. (Ted) Celiz<br /><hr>Bishop's Warden - Robert MacMillan<br />People's Warden - Thomas Kerr","Golden Ears","Lougheed","www.HolySpiritAnglican.ca","604-462-7933",,"","","","","","49.17384","-122.47458",""],
+				["Holy Cross","Vancouver","4580 Walden Street, Vancouver, BC, Canada, V5V 3S5","Priest-in-Charge - The Rev. Daebin Moses Im","Kingsway","Burrard","holycross.vcn.bc.ca","604-879-1344","osakapaul@naver.com","https://www.facebook.com/hcjcac","","","","10am Japanese + English combined","49.24343","-123.099879",""],
+				["Holy Trinity","Vancouver","1440 West 12 Avenue, Vancouver, BC, Canada, V6H 1M8","Incumbent - The Rev. Karl Przywala<br /><hr>Parish Administrator - Mrs. Sharon Grove","Granville","Vancouver","www.holytrinityvancouver.org","604-731-3221","reception@holytrinityvancouver.org","http://www.facebook.com/pages/Holy-Trinity-Vancouver/100677733335036","http://twitter.com/@htvancouver","","","SUNDAY 9:00am - Traditional Worship<br />SUNDAY 10:30am - Contemporary Family Worship<br />Wednesday 7 pm - Said Communion in the Chapel  <br />","49.260606","-123.136881",""],
+				["Holy Trinity","White Rock","15115 Roper Avenue, White Rock, BC, Canada, V4B 2E8","Incumbent - The Rev. Neil Gray<br /><hr>Parish Secretary - Jann Callaghan Cullen","Peace Arch","Fraser","www.holytrinitywhiterock.org","604-531-0884","holytrinitywhiterock@shawbiz.ca","http://www.facebook.com/HolyTrinityWhiteRock","","","","8 a.m. Holy Eucharist <br />10 a.m. Choral Eucharist <br />Thursdays 10:30 a.m. Eucharist ","49.02590","-122.803547",""],
+				["Holy Trinity Cathedral","New Westminster","514 Carnarvon Street, New Westminster, BC, Canada, V3L 1C4","Incumbent - The Rev. Dale Yardy<br />Deacon - The Rev. Christine Magrega<br /><hr>Parish Secretary - Miss Joyce Harwood","Royal City – South Burnaby","Westminster","www.holytrinitycathedral.ca","604-521-2511","secretary@holytrinitycathedral.ca","","","http://holytrinitycathedral.ca/feed/","","Sunday 8am said Holy Eucharist BCP<br />Sunday 10am sung Holy Eucharist BAS, Sunday School<br />Tuesday 12 noon        Midday prayer","49.204386","-122.908130",""],
+				["St. Agnes","North Vancouver","530 East 12th Street, North Vancouver, BC, Canada, V7L 2K4","Incumbent - The Rev. Stephen Muir<br />Deacon - The Rev. Lizz Lindsay<br /><hr>Parish Administrator - Laura Hathway","North Vancouver","Capilano","stagnes.ca/","604-987-0432","agnesnv@telus.net","","","http://stagnes.ca/?feed=rss2","","Sunday 8am quiet Eucharist (Holy Communion) BAS<br />Sunday 10:15am Eucharist","49.318818","-123.058515",""],
+				["St. Alban","Burnaby","7717 19th Avenue, Burnaby, BC, Canada, V3N 1E8","Incumbent - The Rev. Faun H. Harriman<br />Honorary Assistant - The Rev. Bryan Rivers<br />Deacon - The Rev. Ka Hyun Mackenzie Shin<br /><hr>Parish Administrator - Sue Screpnek","Royal City – South Burnaby","Westminster","www.stalbanchurch.com","604-522-4363","stalbanschurchbc@gmail.com","http://www.facebook.com/pages/Burnaby-BC/St-Albans-Church-Your-Church-on-the-Corner/287951816965","https://twitter.com/stalbanschurch","http://stalbanchurch.com/?feed=rss2","","Sunday 8am Traditional Said Service<br />Sunday 10 am Contemporary Service (BAS Eucharist)","49.223406","-122.939869",""],
+				["St. Alban","Richmond","7260St. Alban's Road, Richmond, BC, Canada, V6Y 2K3","Incumbent - The Rev. Margaret Cornish<br />Honorary Assistant - The Rev. Walter Bayley<br /><hr>Office Administrator - Robyn Lewney","Richmond - Delta","Westminster","www.stalbansrichmond.org","604-278-2770","office@stalbansrichmond.org","","","http://stalbansrichmond.org/feed/","","Sunday 8:30am Holy Communion BCP<br />Sunday 10:00am Choral Eucharist<br />Thursday 12:10  Eucharist in the Chapel","49.160377","-123.130798",""],
+				["St. Andrew","Langley","20955 Old Yale Road, Langley, BC, Canada, V3A 7P8","Incumbent - The Rev. Paula Porter Leggett<br /><hr>Parish Administrator - Joanie Markwart<br />Parish Secretary - Trish Farnesse","Valley","Fraser","www.saintandrew.ca","604-534-6514","standrewslangley@shaw.ca","","","","","Sunday 8am said Eucharist BCP<br />Sunday 10am sung Eucharist BAS<br />Thursday 9:30am Eucharist (except Dec 30)","49.098801","-122.640544",""],
+				["St. Anne","Steveston","4071 Francis Road, Richmond, BC, Canada, V7C 1J8","Incumbent - The Rev. Brian Vickers<br /><hr>Parish Secretary - Ms Sharon Price","Richmond - Delta","Westminster","www.stannessteveston.ca","604-277-9626","st_annes@telus.net","","","","","Sunday 8:30am Eucharist.<br />Sunday 10am Family Eucharist, Church School.<br />Wednesday 10am Said Eucharist, Bible Study.<br />Wednesday 7pm Contemporary Eucharist.<br />2nd Thursday 1:30pm Seniors Eucharist (& tea).","49.148479","-123.180445",""],
+				["St. Anselm","Vancouver","5210 University Blvd, Vancouver, BC, Canada, V6T 2H5","Priest-in-Charge - The Rev. Canon Harold Munn<br /><hr>Parish Secretary - Ms. Margaret MacKenzie","Point Grey","Vancouver","www.stanselms.ca","604-224-1410","info@stanselms.ca","http://www.facebook.com/pages/Vancouver-BC/St-Anselms-Anglican-Church/120967641252378","http://www.twitter.com/stanselmsvan","http://saintanselms.ca/wordpress/?feed=rss2","","Sunday Worship & Sunday School 10:30 am","49.263311","-123.230569",""],
+				["St. Augustine","Marpole","8680 Hudson Street, Vancouver, BC, Canada, V6P 4M5","Priest-in-Charge - The Rev. Andrew Halladay<br /><hr>Parish Secretary - Ms Leslee Hunter<br />Parish Secretary - Ms Lesley McKnight","Granville","Vancouver","www.staugustinesanglican.com","604-263-9212","st_augustine@shawbiz.com","","","http://staugustinesanglican.com/site/feed/","","Sunday 10am Service<br />Wednesday 11am Eucharist","49.207181","-123.134351",""],
+				["St. Barnabas","New Westminster","1010 5th Avenue, New Westminster, BC, Canada, V3M 1Y5","Incumbent - The Rev. Emilie Smith","Royal City – South Burnaby","Westminster","stbarnabasparish.ca/","604-526-6646","stbarna@telus.net","http://www.facebook.com/pages/St-Barnabas-Anglican-Church/130870506979285","","http://stbarnabasparish.ca/?feed=rss2","","SUNDAYS 10 AM: BAS Eucharist<br />DAILY MORNING PRAYER: TUESDAY- FRIDAY AT 9:15 AM<br />TUESDAYS NOON: COMMUNION IN THE CHURCH’S SANCTUARY<br />WEDNESDAYS 11 AM: CELTIC STYLE MORNING PRAYER","49.207827","-122.925845",""],
+				["St. Catherine","Capilano","1058 Ridgewood Drive, North Vancouver, BC, Canada, V7R 1H8","Incumbent - The Rev. Christine Rowe<br />Deacon - The Rev. Andrew Wilhelm-Boyles<br />Curate - The Rev. Laurel Dykstra<br /><hr>Administrator - Aurora Stevens","North Vancouver","Capilano","www.saint-catherines.org/","604-985-0666","scadmin@shaw.ca","","","http://www.saint-catherines.org/articles","","Sunday 8:00AM: Holy Communion<br />Sunday 10:00AM: Eucharist<br />Wednesday 10:00AM: Contemplative Eucharist","49.339409","-123.102894",""],
+				["St. Catherine","Port Coquitlam","c/o 2211 Prairie Ave., Port Coquitlam, BC, Canada, V3B 1V8","Priest-in-Charge - The Rev. Gordon Dominey<br /><hr>Parish Secretary - Mrs. Gail Shaw","Tri-Cities - North Burnaby","Lougheed","www.stcatherineschurch.ca","604-942-9812","office@stcatherineschurch.ca","","","http://www.stcatherineschurch.ca/Saint_Catherines/Messy_Church/Messy_Church_files<br />ss.xml","","Sunday 8:30am in the church and and <br />Sunday 7pm (in Settlers Park)<br />Wednesdays at 10:00 am. <br />Messy Church usually every third Saturday (from September to June), 3:30pm.","49.271247","-122.775372",""],
+				["St. Chad","Vancouver","3874 Trafalgar Street, Vancouver, BC, Canada, V6L 2M4","Incumbent - The Rev. Paulina Lee<br />Deacon - The Rev. Katherine Yeo<br /><hr>Parish Secretary - Andrew Ng","Point Grey","Vancouver","www.nwnet.org/stchad/","604-731-5510","StChadParish@aol.com","","","","","Sunday 9:30 AM - Holy Eucharist in Mandarin<br />Sunday 11:00 AM - Holy Eucharist in English <br />Sunday 2:00 PM - Holy Eucharist in Cantonese<br />Tu/We/Fr 9:15am Contemplative (Taize) Prayer <br />Th 1:15pm Contemplative (Taize) Prayer <br />Fr 5:30pm Contemplative (Taize) Prayer ","49.251892","-123.165225",""],
+				["St. Christopher","West Vancouver","1068 Inglewood Avenue, West Vancouver, BC, Canada, V7T 1Y3","Rector - The Rev. Michael McGee<br /><hr>Parish Secretary - Lorraine McNeight","Sea to Sky","Capilano","stchristopherswestvan.org/","604-922-5323","Lmcneight@shaw.ca","https://www.facebook.com/StCsWestVan","http://www.twitter.com/StChrisWestVan","http://stchristopherswestvan.org/feed/","","Sunday 8 AM Holy Communion BCP<br />Sunday 10 AM Holy Communion BAS<br />Thursday 10 AM BCP Communion","49.334492","-123.145849",""],
+				["St. Clement","Lynn Valley","3400 Institute Road, North Vancouver, BC, Canada, V7K 2K9","Incumbent - The Venerable Lynne McNaughton<br />Deacon - The Rev. Elizabeth Mathers<br /><hr>Parish Secretary - Mrs. Yvonne Gardner","North Vancouver","Capilano","www.stclementschurch.ca","604-988-4418","admin@stclementschurch.ca","","","","","Sunday 9:45 a.m contemporary eucharist or holy communion in the Anglican style.<br />1st Sunday of the month, 8:00 a.m. a quiet traditional BCP service.","49.339635","-123.03672",""],
+				["St. Columba","Pitt Meadows","12109 Harris Road, Pitt Meadows, BC, Canada, V3Y 2B6","Priest-in-Charge - The Rev. Gordon Dominey","Tri-Cities - North Burnaby","Lougheed","www.stcolumba-pm.ca","604-465-6233",,"","","","","Sunday 11am Holy Communion ","49.222594","-122.689860",""],
+				["St. Cuthbert","Delta","11601 82nd Avenue, Delta, BC, Canada, V4C 2C3","Incumbent - The Rev. Allan Carson<br />Honorary Assistant - The Rev. Donna Kirkpatrick<br /><hr>Parish Secretary - Mrs. Suzanne Hains","Peace Arch","Fraser","www.stcuthbert.ca","604-594-8822","shains@stcuthbert.ca","","","http://stcuthbert.ca/feed/","","Sunday 8:00 & 10:00 AM <br />Thursday 10:00 AM ","49.152359","-122.901255",""],
+				["St. David","Tsawwassen","1115 51A Street, Delta, BC, Canada, V4M 2Y2","Incumbent - The Rev. Paul Woehrle<br />Deacon - The Rev. Steve Thompson<br /><hr>Administrator - Belinda Kishimoto","Richmond - Delta","Westminster","www.stdavidsdelta.com","604-943-4737","admin@stdavidsdelta.com","https://www.facebook.com/anglicanchurch","https://twitter.com/stdavidsdelta","http://stdavidsdelta.com/RSS/RSS.asp?i=2416","https://vimeo.com/stdavidsdelta","Sunday 8:00 a.m. Traditional Holy Eucharist BCP<br />Sunday 10:00 a.m. Contemporary Eucharist service BAS<br />Wednesday 11:00 am Senior service, Holy Communion BCP","49.022944","-123.080554",""],
+				["St. David & Paul","Powell River","6310 Sycamore Street, Powell River, BC, Canada, V8A 4L1","Priest-in-Charge - The Rev. Dr. Adela Torchia<br />Honorary Assistant - The Rev. Dr. Paula Sampson<br />Retired Clergy - The Rev. Ruth Taylor<br />Retired Clergy - The Rev. Stuart Isto<br />Honorary Assistant - The Ven. Dr. John A 'Ian' MacKenzie<br /><hr>Parish Secretary - Mrs. Janet Palen","Sea to Sky","Capilano","www.members.shaw.ca/stdavidandstpaul","604-483-4230","anglican1@telus.net","","","","","Sunday 10am Holy Eucharist<br />Wednesday 8am 10am Holy Eucharist","49.875356","-124.550115",""],
+				["St. Dunstan","Aldergrove","3025 264th Street, Aldergrove, BC, Canada, V4W 2W6","Priest-in-Charge - The Rev. Helen Tervo<br />Deacon - The Rev. Kim Prokopchuk<br />Deacon - The Rev. Linda Varin<br /><hr>Parish Administrator - Linda Varin","Valley","Fraser","www.st-dunstans.ca","604-856-5393","st.dunstans@telus.net","","","","","Sundays - 10 a.m. Holy Eucharist <br />Wednesdays - 6:30 p.m.'Going Home' service<br />Fridays - 8:30a.m. Morning Prayer <br />3rd Friday 4:30 p.m. Messy Church","49.056965","-122.492861",""],
+				["St. Faith","Vancouver","7284 Cypress Street, Vancouver, BC, Canada, V6P 5M3","Rector - The Rev. Dr. Richard Leggett<br />Deacon and Parish Admin. - The Rev. Christine Wilson","Granville","Vancouver","www.stfaiths.ca","604-266-8011","office@stfaiths.ca","https://www.facebook.com/stfaithsvancouver","","","","Sunday 8am spoken Eucharist (Holy Communion) <br />Sunday 10am sung, contemporary Eucharist<br />Wednesday 10am spoken Eucharist","49.219469","-123.149681",""],
+				["St. Francis-in-the-Wood","West Vancouver","4773 South Piccadilly Road, West Vancouver, BC, Canada, V7W 1J8","Rector - The Rev. Dr. Angus Stuart<br /><hr>Administrative Assistant - Mark Galvani","Sea to Sky","Capilano","www.stfrancisinthewood.ca","604-922-3531","stfrancis@telus.net","https://www.facebook.com/stfrancisinthewood","","http://www.stfrancisinthewood.ca/articles","","Sunday 8:00AM: Traditional Communion<br />Sunday 10:00AM: Family Service<br />Wednesday 10:00AM: Contemplative Eucharist","49.344357","-123.246354",""],
+				["St. George","Fort Langley","Box 335, 9160 Church Street, Fort Langley, BC, Canada, V1M 2R6","Priest-in-Charge - The Rev. Paul Borthistle<br />Deacon - The Rev. Eileen Nurse<br />Deacon - The Rev. Karen Saunders<br /><hr>Administrator - Trixie Nienaber","Valley","Fraser","www.stgeorgeanglican.ca","604-888-7782","stgeorgeparish@telus.net","","","","","Sunday 8:30am Holy Eucharist<br />Sunday 10:30 am Holy Eucharist<br />Tuesday 10am Holy Eucharist","49.16590","-122.570514",""],
+				["St. George","Vancouver","2950 Laurel Street, Vancouver, BC, Canada, V8Z 3T3","Priest in Charge - The Rev. John Marsh<br /><hr>Parish Secretary - Neil Seedhouse","Kingsway","Burrard","www.stgeorgevancouver.ca","604-877-1788","info@stgeorgevancouver.ca","","","","","Sunday 9:30am Eucharist (St. Mark)<br />Sunday 11:15am Eucharist (St. George)<br />Wednesday 7pm Contemplative Eucharist<br />Mondays 7pm Centering Prayer<br />Thursday 2pm Centering Prayer","49.258826","-123.123921",""],
+				["St. Helen","Surrey","10787 128th Street, Surrey, BC, Canada, V3T 3A2","Priest-in-Charge - The Rev. Roberta Fraser<br /><hr>Parish Communications - Chris Richards<br />AdministratorMrs. Gail Kiewitt","Peace Arch","Fraser","www.sainthelenschurch.org","604-581-4800","churchoffice@shawbiz.ca","https://www.facebook.com/sainthelensurrey","http://twitter.com/SaintHelensAng","http://sainthelenschurch.org/feed/","","Sunday 10am Holy Eucharist<br />Wednesday 10am Morning Prayer","49.199231","-122.867897",""],
+				["St. Helen","Vancouver","4405 West 8 Avenue, Vancouver, BC, Canada, V6R 2A3","Incumbent - The Rev. Scott Gould<br />Honorary Assistant Priest - The Rev. Dr. Alain-Michel Rocheleau<br />Deacon - The Rev. Pitman Potter<br /><hr>Children's Min. Coordinator - Louisa Farrell<br />Parish Administrator - Maria Hizon","Point Grey","Vancouver","www.sthelensanglican.org","604-224-0212","sthelenswpg@telus.net","https://www.facebook.com/pages/St-Helens-Anglican-Church/625495604141849","","http://sthelensanglican.org/feed/","https://soundcloud.com/scottgou","Sunday 8am. Said Eucharist, BCP<br />Sunday 10am. Sung Eucharist, BAS<br />Wednesday 7:00 pm. Vespers (Jazz/Folk/Holden/Taize)","49.265536","-123.206140",""],
+				["St. Hilda","Sechelt","Box 302, 5838 Barnacle Street, Sechelt, BC, Canada, V0N 3A0","Incumbent - The Rev. Clarence Li<br />Deacon - The Rev. Bruce Morris<br /><hr>Parish Secretary - Ms. Stephanie Eaton","Sea to Sky","Capilano","www.sthilda.ca","604-885-5019","admin@sthilda.ca","http://www.facebook.com/sthilda","","","","Sunday 8:30am Holy Eucharist BCP w/hymns<br />Sunday 10:00 a.m. Holy Eucharist<br />Wednesday 8am Contemplative Eucharist Service","49.471585","-123.764892",""],
+				["St. James","Vancouver","303 East Cordova Street, Vancouver, BC, Canada, V6A 1L4","Incumbent - The Rev. Father Mark Greenaway-Robbins<br />Hon. Assistant Priest - The Rev. Brother John Blyth<br />Street Outreach Priest - The Rev. Father Matthew Johnson<br />Hon. Assistant Priest - The Rev. Mother Alexis Saunders<br /><hr>Administrator - Linda Adams","Hastings","Burrard","www.stjames.bc.ca","604-685-2532","office@stjames.bc.ca","https://www.facebook.com/pages/St-James-Anglican-Church/108496415855726","http://twitter.com/stjamesanglican","","","Sunday 8:30 am - Low Mass; Book of Common Prayer <br />Sunday 10:30 am - High Mass Book of Common Prayer <br />Monday, Wednesday, Friday  12:10 pm Daily Mass, Lady Chapel<br />Tues (Lady Chapel),   9:30 am Daily Mass<br />Thursday (Blessed Sacrament Chapel)<br />M- F: Morning Prayer 9:00 a.m., Evening Prayer 5:00 p.m. Daily Offices (Blessed Sacrament Chapel)<br />Evensong and Benediction @ 5:00pm last Sunday each month, with the exception of July and August.","49.282256","-123.097493",""],
+				["St. John","Maple Ridge","21299 River Road, Maple Ridge, BC, Canada, V2X 2B1","Incumbent - The Rev. Charles Balfour<br />Deacon - The Rev. Margaret Cole<br /><hr>Parish Secretary - Gail Lefevre","Golden Ears","Lougheed","www.stjmr.org","604-463-5733","stjmr@shaw.ca","","","","","","49.213181","-122.631332",""],
+				["St. John","Port Moody","2208St. Johns Street, Port Moody, BC, Canada, V3H 2A7","Incumbent - The Venerable Grant Rodgers<br />Deacon - The Rev. Anne Anchor<br />Deacon - The Rev. Trudi Shaw<br /><hr>Parish Secretary - Mrs. Karen Evans","Tri-Cities - North Burnaby","Lougheed","www.stjohntheapostle.ca","604-936-7762","stjohn7@shaw.ca","https://www.facebook.com/StJohnAnglican","http://twitter.com/@StJohnAnglican","http://www.stja.ca/feed/","http://www.youtube.com/channel/UC2J6Ecqy42pWllEeL8ZYIMA","Sunday at 8:30 – quiet Eucharist BAS<br />Sunday at 10:00 – contemporary Eucharist BAS","49.276950","-122.863426",""],
+				["St. John","Sardis","46098 Higginson Road, Sardis, BC, Canada, V2R 2A9","Deacon - The Rev. Larry Adkins<br /><hr>Secretary - Donna Hernblad","Valley","Fraser","www.stjohnsardis.ca","604-858-2229","st.johns@shaw.ca","http://www.facebook.com/pages/St-Johns-Anglican-Church-SardisChilliwack-BC/107711475952605","","http://www.stjohnsardis.ca/index.php?format=feed&type=rss","","Sunday 9.30am & 11.15am Holy Eucharist<br />Wednesday 9:30am Morning Prayer/Holy Communion<br />Last Wednesday 6pm Pub Church (Original Joes)","49.125626","-121.948831",""],
+				["St. John","Shaughnessy","1490 Nanton Avenue, Vancouver, BC, Canada, V6H 2E2","Incumbent - The Rev. Father Michael Fuller<br />Associate Priest - The Rev. Father Michael Forshaw<br /><hr>Parish Administrator - Ms. Janet Hamilton","Granville","Vancouver","www.sjs.net","604-731-4966","church@sjs.net","https://www.facebook.com/pages/St-Johns-Anglican-Church-Shaughnessy-Granville-at-Nanton-Vancouver/315760868494415?fref=ts","https://twitter.com/sjsnet","","","Sunday 8.00 am Holy Communion from the Book of Common Prayer.<br />Sunday 10.00 am Sung Eucharist from the Book of Alternative Services. <br />8.00 am Monday – Saturday, Morning Prayer from the Book of Alternative Services.<br />5.30 pm Monday – Saturday, Evening Prayer from the Book of Common Prayer.<br />11.00 am Thursday, Holy Communion from the Book of Alternative Services.","49.247397","-123.138328",""],
+				["St. John the Divine","Squamish","Box 236, 1930 Diamond Road, Garibaldi Highlands, BC, Canada, V0N 1T0","Priest-in-Charge - The Rev. William Roberts<br /><hr>Administrator - Lisa Oakes","Sea to Sky","Capilano","www.stjohnsquamish.ca","604-898-5100",,"http://www.facebook.com/pages/St-John-the-Divine-Squamish/683368905010365","","http://stjohnsquamish.ca/feed/","","Sunday 10 am: Holy Eucharist<br />Morning prayer<br />Tuesday 9:30 am: Centering Prayer<br />1st Monday 7 pm: Taizé Service","49.739121","-123.131552",""],
+				["St. John the Evangelist","North Vancouver","220 West 8th Street, North Vancouver, BC, Canada, V7M 1N1","Incumbent - The Rev. Patrick Blaney<br />Hon. Assistant Priest - The Rev. Brock Lupton<br /><hr>Parish Secretary - Eleanor Rogers","North Vancouver","Capilano","www.stjohnnv.ca","604-986-1151","stjohnnv@telus.net","","","http://stjohnnv.ca/comments/feed/","","Sunday 10:00am Contemporary Communion Service<br />Wednesday 10am: Eucharist with anointing","49.319598","-123.076507",""],
+				["St. Laurence","Coquitlam","825 St Laurence Street, Coquitlam, BC, Canada, V3J 6G7","Priest-in-Charge - The Rev. Keith Gilbert<br />Honorary Assistant - The Rev. Al Hoskings<br />Honorary Assistant - The Rev. Carla McGhie<br />Deacon - The Rev. Stephen Bailey<br />Deacon - The Rev. Wally Shea<br /><hr>Parish Secretary - Ms. Shelley Begg","Tri-Cities - North Burnaby","Lougheed","www.saintlaurence.ca","604-936-5423","stlaurence@telus.net","http://www.facebook.com/pages/St-Laurence-Coquitlam/209957989078671","https://twitter.com/StLaurenceCoq","","","Sunday 9:00am   A quieter service (no choir).<br />Sunday 10:30am Communion Service for families of all kinds, with music and activities for kids.<br />Wednesday 8:00am - An early morning Eucharist (said) to start your day.","49.26420","-122.842343",""],
+				["St. Margaret Cedar Cottage","Vancouver","1530 East 22nd Avenue, Vancouver, BC, Canada, V5N 2P1","Rector - The Rev. Heidi Brear<br /><hr>Parish Secretary - Ms. Grace Velarde","Kingsway","Burrard","www.stmargaretscedarcottage.ca","604-874-5030",,"","","http://www.stmargaretscedarcottage.ca/index.php?format=feed&type=rss","","Sunday 10am Eucharist","49.250382","-123.073303",""],
+				["St. Mark","Kitsilano","1805 Larch Street, Vancouver, BC, Canada, V6K 3N9","Priest - The Rev. John Marsh<br /><hr>Verger - Neil Seedhouse","Point Grey","Vancouver","www.stmarks.ca","604-736-2838","stmarkkits@telus.net","https://www.facebook.com/login.php","","","","Sunday 9:30am Community Eucharist<br />Sunday 11:15am BAS Eucharist<br />Monday 7pm Centering Prayer<br />Wednesday 7pm Contemplative Eucharist<br />Thursday 2pm Centering Prayer","49.269826","-123.162352",""],
+				["St. Mark","Ocean Park","12953 20th Avenue, Surrey, BC, Canada, V4A 1Z1","Incumbent - The Rev. Craig Tanksley<br />Assistant Priest - The Rev. Denise Doerksen<br />Hon. Assistant Priest - The Rev. Eric Lowe<br /><hr>Parish Administrator - Sheila Johnston","Peace Arch","Fraser","www.stmarkbc.org","604-535-8841","office@stmarkbc.org","https://www.facebook.com/stmarksbc","","http://stmarkbc.org/feed/","","Sunday 8am Holy Eucharist (Communion) BCP<br />Sunday 10am Holy Eucharist (Communion) BAS<br />Wednesday 10am Holy Eucharist (Communion) BCP","49.038539","-122.863975",""],
+				["St. Martin","North Vancouver","195 East Windsor Road, North Vancouver, BC, Canada, V7N 1J9","Priest-in-Charge - The Rev. John Firmston","North Vancouver","Capilano","www.saintmartins.ca","604-985-5919","admin@saintmartins.ca","","","http://www.saintmartins.ca/feeds/posts/default","","Sunday 8 am    Holy Eucharist<br />Sunday 10 am   Holy Communion. Matins every 2nd Sunday<br />Friday 9.30 am   Contemplative Prayer Group","49.338149","-123.069165",""],
+				["St. Mary","Kerrisdale","2490 West 37th Avenue, Vancouver, BC, Canada, V6M 1P5","Rector - The Rev. Jeremy Clark-King<br />Associate Priest (on leave)The. Rev. David Taylor<br /><hr>Parish Administrator - Mrs. Christine Mitchell","Point Grey","Vancouver","www.stmaryskerrisdale.ca","604-261-4228","secretary@stmaryskerrisdale.ca","","","","","Sunday 8:00, 9:15 & 11:15am<br />Tuesdays 7:00 am<br />Monday – Friday: Morning Prayer 8:30 am","49.238392","-123.162535",""],
+				["St. Mary","Sapperton","121 East Columbia Street, New Westminster, BC, Canada, V3L 3V7","Incumbent - The Rev. Georgina Harris<br /><hr>Parish Secretary - Ms. Doreen McQueen","Royal City – South Burnaby","Westminster","www.stmarysapperton.ca","604-521-2314","rector@stmarysapperton.ca","","","","","Sunday 10am Holy Eucharist","49.220827","-122.893020",""],
+				["St. Mary","South Hill","808 East 50th Avenue, Vancouver, BC, Canada, V5X 1B5","Incumbent - The Rev. Expedito Farinas<br /><hr>Parish Secretary - Mrs. Susan Wilson","Kingsway","Burrard","www.stmarysouthhill.com/","",,"","","","","","49.224463","-123.087796",""],
+				["St. Matthew","Abbotsford","2010 Guilford Drive, Abbotsford, BC, Canada, V2S 5R2","Rector - The Rev. Fr. Allen Doerksen<br /><hr>Office Assistant - Kim Agassiz","Valley","Fraser","anglicanabbotsford.com/home.php","604.853.2416","church@anglicanabbotsford.com","","","","","Sunday Holy Communion 10:00 am<br />Tuesday morning prayer 7:15 am<br />Wednesday contemplative prayer 7:30 am<br />Thursday Taize mid-week prayer 5:00 pm<br />","49.038306","-122.265879",""],
+				["St. Matthias &St. Luke","Vancouver","680 West 49 Avenue, Vancouver, BC, Canada, V5Z 2S4","Incumbent - The Rev. Vivian Lam","Granville","Vancouver","www.stmstl.org","604-321-7101","info@stmstl.org","https://www.facebook.com/StMatthiasStLukeAnglicanChurch","","http://www.stmstl.org/index.php/feed/","","Sunday 10:30am - Holy Eucharist","49.226170","-123.120434",""],
+				["St. Michael","Surrey","12996 60th Avenue, Surrey, BC, Canada, V3X 2L5","Incumbent - The Rev. Luisito (Louie) Engnan<br /><hr>Parish Secretary - Kelly Montfort","Peace Arch","Fraser","www.stmichaelschurch.ca","604-591-8323","saintmichaels@telus.net","","","","","Sunday 8:30am Holy Communion BCP<br />Sunday 10am Holy Eucharist BAS","49.111834","-122.863415",""],
+				["St. Michael","Vancouver","409 East Broadway, Vancouver, BC, Canada, V5T 1W8","Priest-in-Charge - The Rev. Wilmer Toyoken<br /><hr>Parish Secretary - Fanny Balaki","Hastings","Burrard","www.stmikes-church.ca/","604-876-8191","stmichaels_in_mountpleasant@hotmail.com","","","","","","49.262529","-123.094985",""],
+				["St. Oswald","Port Kells","9566 190th Street, Surrey, BC, Canada, V4N 3S3","Priest in Charge - The Rev. Paul Illical<br /><hr>Parish Secretary - Louise Goode","Peace Arch","Fraser","www.stoswalds.ca","778.233.4286","illical@telus.net","","","http://www.stoswaldschurch.org/feed/","","Sunday 10:30am","49.176150","-122.696029",""],
+				["St. Paul","Vancouver","1130 Jervis Street, Vancouver, BC, Canada, V6E 2C7","Rector - The Rev. Jessica Schaap<br /><hr>Parish Secretary/Labyrinth Adm - Barry Goheen","Hastings","Burrard","www.stpaulsanglican.bc.ca","604-685-6832","office@stpaulsanglican.bc.ca","","","http://stpaulsanglican.bc.ca/feed","","Sunday 8am Holy Communion (BCP)<br />1st Sunday 10am Holy Communion (BAS)<br />2nd + Sunday<br />9:15 a.m. Holy Communion (BAS)<br />11:00 a.m. Holy Communion (BAS)<br />Wednesday 7pm<br />Thursday 11:15am<br />4th Sunday 3:45pm service at Haro Park","49.28315","-123.133671",""],
+				["St. Philip","Dunbar","3737 West 27th Avenue, Vancouver, BC, Canada, V6S 1R2","Incumbent - The Venerable John Stephens<br />Hon. Assistant Priest - The Rev. Dr. Marilyn Hames<br /><hr>Administrator - Anne Richards<br />Youth Leader - Caitlin Reilley Beck","Point Grey","Vancouver","www.stphilipsdunbar.com","604-224-3238","stphilips@aebc.com","","","http://www.stphilipsdunbar.com/feed/","","Sunday 8.00am & 10.00am  Holy Eucharist BAS <br />Wednesday 10.00am  Holy Eucharist.<br />Thursday 7.30am    Holy Eucharist","49.248108","-123.186822",""],
+				["St. Stephen","Burnaby","9887 Cameron Street, Burnaby, BC, Canada, V3J 1M3","Priest-in-Charge - The Rev. Gary Hamblin<br /><hr>Administrator - Mrs. Joan Seeton","Tri-Cities - North Burnaby","Lougheed","ststbby.ca","604-421-0472","ststbby@shaw.ca","","","http://ststbby.ca/feed/","","Sunday 10am: Eucharist","49.253449","-122.894069",""],
+				["St. Stephen","West Vancouver","885 22 Street, West Vancouver, BC, Canada, V7V 4C1","Rector - The Rev. Trevor Fisher<br /><hr>Administrator - Stella Carmona","Sea to Sky","Capilano","www.ststephenschurch.ca","604-926-4381","ststephenswv@shawlink.ca","","","","","SUNDAY 8:00am & 10:00am<br />WEDNESDAY10:00am","49.332494","-123.170942",""],
+				["St. Thomas","Chilliwack","46048 Gore Avenue, Chilliwack, BC, Canada, V2P 1Z6","Incumbent - The Rev. John Sovereign<br />Deacon - The Rev. Jennifer Burgoyne","Valley","Fraser","www.stthomaschilliwack.com","604-792-8521","stthomaschilliwack@gmail.com","http://www.facebook.com/pages/St-Thomas-Anglican-Church/239142272775337","","","","Sunday 8am - Traditional BCP Holy Communion<br />Sunday 10:15am - Family Service BAS Eucharist ","49.169083","-121.951153",""],
+				["St. Thomas","Vancouver","2444 East 41 Avenue, Vancouver, BC, Canada, V5R 2W4","Incumbent - The Rev. Michael Batten<br />Honorary Assistant - The Rev. Ron Wickens","Kingsway","Burrard","www.stthomasvancouver.ca","604-434-6111","officest@telus.net","","","http://www.stthomasvancouver.ca/feed/","","Sunday 10am Holy Eucharist<br />Wednesday 8am 10am Holy Eucharist","49.232821","-123.056645",""],
+				["St. Timothy","Brentwood","4550 Kitchener Street, Burnaby, BC, Canada, V5C 3M7","Incumbent - The Rev. Stephanie Shepard<br /><hr>Parish Secretary - Ms. Yolanda Lumase","Tri-Cities - North Burnaby","Lougheed","www.sainttimothy.ca","604-299-6816","office@sainttimothy.ca","","","http://www.sainttimothy.ca/?feed=rss2","","Sunday 10am Holy Communion<br />Sunday 9pm Evening Prayer <br />M-Th 8:30am Morning Prayer","49.271869","-123.002264",""],
+				["Executive Archdeacon","Diocese","580 - 401 West Georgia Street Vancouver, BC, V6B 5A1","The Ven. G. Douglas Fenton","Bishop","Office","vancouveranglican.com/","604 684-6306,216","dfenton@vancouver.anglican.ca","","","","","","","",""],
+				["Administrative Assistant to the Bishop","Diocese","580 - 401 West Georgia Street Vancouver, BC, V6B 5A1","Rev. Eileen Nurse","Bishop","Office","vancouveranglican.com/","604 684-6306,228","enurse@vancouver.anglican.ca","","","","","","","",""],
+				["Business Administrator","Diocese","580 - 401 West Georgia Street Vancouver, BC, V6B 5A1","Rob Dickson","Admin","Office","vancouveranglican.com/","604 684-6306,215","rdickson@vancouver.anglican.ca","","","","","","","",""],
+				["Bishop","Diocese","580 - 401 West Georgia Street Vancouver, BC, V6B 5A1","The Right Rev. Melissa Skelton","Bishop","Office","vancouver.anglican.ca","604 684-6306",,"","","","","","","",""],
+				["Controller","Diocese","580 - 401 West Georgia Street Vancouver, BC, V6B 5A1","Mark Beley","Admin","Office","vancouveranglican.com/","604 684-6306,214","mbeley@vancouver.anglican.ca","","","","","","","",""],
+				["Financial Administrator","Diocese","580 - 401 West Georgia Street Vancouver, BC, V6B 5A1","Michèle van Teunenbroek","Admin","Office","vancouveranglican.com/","604 684-6306,226"," payroll@vancouver.anglican.ca","","","","","","","",""],
+				["Administrative Assistant","Diocese","580 - 401 West Georgia Street Vancouver, BC, V6B 5A1","Sandra Stevenson","Admin","Office","vancouveranglican.com/","604 684-6306,212","sstevenson@vancouver.anglican.ca","","","","","","","",""],
+				["Reception","Diocese","580 - 401 West Georgia Street Vancouver, BC, V6B 5A1","Phil Colvin","Admin","Office","vancouver.anglican.ca","604 684-6306,210","pcolvin@vancouver.anglican.ca","","","","","","","",""],
+				["Director for Ministry and Mission Development (Acting)","Diocese","580 - 401 West Georgia Street Vancouver, BC, V6B 5A1","Rev. Ruth Monette","Ministry","Office","vancouver.anglican.ca","604 684-6306,219","rmonette@vancouver.anglican.ca","","","","","","","",""],
+				["Stewardship and Planned Giving Director","Diocese","580 - 401 West Georgia Street Vancouver, BC, V6B 5A1","Glen Mitchell","Ministry","Office","thegoodsteward.ca","604 684-6306,218","gmitchell@vancouver.anglican.ca","","","","","","","",""],
+				["Ministry Assessment Process (MAP) Associate","Diocese","580 - 401 West Georgia Street Vancouver, BC, V6B 5A1","Tasha Carrothers","Ministry","Office","vancouver.anglican.ca","604 684-6306,227","tcarrothers@vancouver.anglican.ca","","","","","","","",""],
+				["MAP Resource Associate","Diocese","580 - 401 West Georgia Street Vancouver, BC, V6B 5A1","Rev. Marnie Peterson","Ministry","Office","vancouver.anglican.ca","604 684-6306,221","mpeterson@vancouver.anglican.ca","","","","","","","",""],
+				["Communications","Diocese","580 - 401 West Georgia Street Vancouver, BC, V6B 5A1","Randy Murray","Communications","Office","vancouver.anglican.ca","604-684-6306,223","rmurray@vancouver.anglican.ca","","","","","","","",""],
+				["Archivist","Diocese","580 - 401 West Georgia Street Vancouver, BC, V6B 5A1","Melanie Delva","Archives","Office","vancouver.anglican.ca","604  822-9583","archives@vancouver.anglican.ca","","","","","","","",""]
+			];
+			function filterList(item, value){
+				switch(item){	
+					case "name":
+						nFilter=value;
+						break;
+					case "city":
+						cFilter=value;
+						break;
+					case "clergy":
+						pFilter=value;
+						break;
+					case "dean":
+						dFilter=value;
+						break;
+					case "arch":
+						aFilter=value;
+						break;
+				}
+				showList();
+			}
+			function showList(){
+				//<!--html ="<div id='head'><div class='banner'></div><div class='menu'></div></div><br />";-->
+				html = "<table width='100%' border='1'><thead><tr><th id='tName' width='10%'><b><u>Parish</u></b></th><th id='tNeigh' width='10%'><b><u>City/Area</u></b></th><th id='tAddr'><b><u>Address</u></b></th><th id='tClerg'><b><u>Priest In Charge</u></b></th></tr></thead>";
+		        nFilter=document.getElementById("name").value; 
+				for (var i = 0; i < parishInfo.length; i++) {
+					if((cFilter==""||cFilter==parishInfo[i][1])&&(dFilter==""||dFilter==parishInfo[i][4])&&(aFilter==""||aFilter==parishInfo[i][5])&&(nFilter==""||parishInfo[i][0].indexOf(nFilter)>=0)&&(pFilter==""||parishInfo[i][3].indexOf(pFilter)>=0)){
+				        var oneLine="";
+				        if(parishInfo[i][3].indexOf('<')>1){
+				        	oneLine=parishInfo[i][3].substr(0,parishInfo[i][3].indexOf('<'));
+				    	}
+				    	else{
+				    		oneLine=parishInfo[i][3];
+				    	}
+
+						html += "<tr><td id='tName'><a href='#' onclick='showInfo("+i+");'>"+parishInfo[i][0]+"</a></td><td id='tNeigh'>"+parishInfo[i][1]+"</td><td id='tAddr'>"+parishInfo[i][2]+"</td><td id='tClerg'>"+oneLine+"</td></tr>";
+					};
+				}
+				html += "</table>";
+				var el = document.getElementById("content");
+				el.innerHTML = html;
+				document.getElementById("control").style.display="block"; 
+				document.getElementById("footer").style.display="none"; 
+				document.getElementById("header").style.display="block"; 
+			}
+			function showInfo(num){
+				//bihefg.djklmn.opqr0
+				// html="<div id='head'><div class='banner'></div><div class='menu'></div></div><br />";
+				html="<p><div id='details'>";
+				html+="<div style='inline-block'><h3>"+parishInfo[num][0]+","+parishInfo[num][1]+" </h3>";
+								
+				html+="<p><strong>Contact Details: </strong><br />";
+				html+="<strong>Address:</strong> "+parishInfo[num][2]+"<br />"  // address
+				html+="<strong>Phone:</strong> "+parishInfo[num][7]+"<br />"  // phone
+				html+="<strong>Website:</strong> http://"+parishInfo[num][6]+"<br /> "  // url
+				html+="<strong>Email:</strong> "+parishInfo[num][8]+"</p>"  // email
+				if(parishInfo[num][2]!=""){
+					html+="<a href='http://google.com/maps?q=\""+parishInfo[num][2]+"\"'><img width='48px' src='media/map0.png'/></a>"  // facebook
+				}
+				if(parishInfo[num][7]!=""){
+					html+="<a href=tel:'"+parishInfo[num][7]+"'><img width='48px' src='media/phone0.png'/></a>"  // facebook
+				}
+				if(parishInfo[num][6]!=""){
+					html+="<a target='_blank' href='http://"+parishInfo[num][6]+"'><img width='48px' src='media/web0.png'/></a>"  // facebook
+				}
+				if(parishInfo[num][8]!=""){
+					html+="<a href='mailto:"+parishInfo[num][8]+"?Subject=[dgz]Mobile Contact'><img width='48px' src='media/email0.png'/></a>"  // facebook
+				}
+				if(parishInfo[num][9]!=""){
+					html+="<a href='"+parishInfo[num][9]+"'><img width='48px' src='media/facebook.png'/></a>"  // facebook
+				}
+				if(parishInfo[num][10]!=""){
+					html+="<a href='"+parishInfo[num][10]+"'><img width='48px' src='media/twitter.png'/></a>" // twitter
+				}
+				if(parishInfo[num][11]!=""){
+					html+="<a href='"+parishInfo[num][11]+"'><img width='48px' src='media/rss.png'/></a>" // rss
+				}
+				if(parishInfo[num][12]!=""){
+					html+="<a href='"+parishInfo[num][12]+"'><img width='48px' src='media/media.png'/></a></a>" // media
+				}
+				html+="</p>"; //address
+				html+="<p><strong><u>Service Times:</u></strong><br />";
+				html+=parishInfo[num][13];
+				html+="</p>" // services
+				html+="<p><strong>Clergy & Support Staff:</strong><br />"+parishInfo[num][3]+"</p>";
+
+				<!--html+="<p><em><strong>Archdeaconry/Deanery:</strong> "+parishInfo[num][4]+"/"+parishInfo[num][5]+"</em></p>";-->
+				html +="</div>";
+				var el = document.getElementById("content");
+				el.innerHTML = html;
+		        document.getElementById("control").style.display="none"; 
+		        document.getElementById("details").style.display="block"; 
+				document.getElementById("header").style.display="block"; 
+			}
+			function showSplash(){
+				<!--document.getElementById("control").style.display="none"; -->
+				html="<div class='splash'><img src='media/logo.png' top='15%' width='70%'/><br /><br />";
+				html+="<font size='2'>Diocese of<br />";
+				html+="New Westminster</font>";
+				html+="<hr width='70%'>";
+				html+="<span style='font-size:18px'>Anglican Church of Canada</span></div>";
+				var el = document.getElementById("content");
+				el.innerHTML = html;
+				setTimeout(function() {
+					showMain();
+				}, 3000);
+			}
+			function showMain(){
+				//html="<div id='head'><div class='banner'></div><div class='menu'><br /></div></div><br />";
+				html="";
+//				html+="<div id='socialrow'>";
+//				html+="<a href='https://www.facebook.com/home.php#!/pages/Anglican-Conversation-Diocese-of-New-Westminster/130319853684475'><img height='36px' src='media/facebook.png'/></a>";
+//				html+="<a href='http://nwanglicanblog.wordpress.com/'><img height='36px' src='media/wordpress.png'/></a>";
+				//html+="<a target='_system' href='='#'><img height='36px' src='media/share.png'/></a>";
+//				html+="</div>";
+				
+				html+="<div id='main'><br />";
+//				html+="<p><a class='btn0' href='http://www.vancouver.anglican.ca/Calendar/tabid/29/mode/EventList/Default.aspx' onClick='javascript:return openExt(this)'><img height='48px' src='media/cal0.png'/>&nbsp;Events</a><br /><br /></p>";
+//				html+="<p><a class='btn0' href='http://www.vancouver.anglican.ca/News/DiocesanNews.aspx'onClick='javascript:return openExt(this)'><img height='48px' src='media/news0.png'/>&nbsp;Updates</a><br /><br /></p>";
+				html+="<p><a class='btn0' href='#' onclick='showList()'><img height='48px' src='media/find0.png'/>&nbsp;Find a Church</a><br /><br /></p>";
+				html+="<p><a class='btn0' href='https://www.facebook.com/home.php#!/pages/Anglican-Conversation-Diocese-of-New-Westminster/130319853684475'><img height='48px' src='media/facebook.png'/>&nbspFacebook Page</a><br /><br /></p>";
+	//			html+="<p><a class='btn0' href='https://www.twitter.com/dofnwcomm'><img height='48px' src='media/twitter.png'/>&nbspTwitter Feed</a><br /><br /></p>";
+				html+="<p><a class='btn0' href='#' class='btn0' onclick='showLinks()'><img height='48px' src='media/links0.png'/>&nbsp;Links</a><br /></p>";
+				html+="</div><br /> <br /><br />";
+				html+="<div id='foot'><p>Growing communities<br />of faith in Jesus Christ<br />to serve God's mission<br />in the world.</p></div>";
+				
+				var el = document.getElementById("content");
+				el.innerHTML = html;
+				document.getElementById("footer").style.display="block"; 
+				document.getElementById("header").style.display="block"; 
+				document.getElementById("control").style.display="none"; 
+			}
+			function showLinks(){
+				var tdBg=['#777777','#555555','#aaaaaa','#cccccc','#999999'];
+				var linksList=[['The Anglican Communion','http://www.anglicancommunion.org/',1,'media/communion.jpg'],
+					['Diocese of Taiwan','http://www.episcopalchurch.org.tw/',1,'media/taiwan.gif'],
+					['Ecclesiastical Province of BC & Yukon','http://www.provbcyanglican.ca/',1,'media/acc.jpg'],
+					['The ELCIC','http://www.elcic.ca/',2,'media/elcic.jpg'],
+					['General Synod (ACC)','http://www.anglican.ca/',1,'media/acc.jpg'],
+					['The ELCIC-BC Synod','http://www.bcsynod.org/',2,'media/elcbc.jpg'],
+					['Screening in Faith','http://vancouveranglican.com/',0,'media/logo.png'],
+					['North Vancouver Deanery','http://northvandeanery.blogspot.com/',0,'media/logo.png'],
+					['The Community','http://thecommunity.anglican.ca/',1,'media/community.png'],
+					['Sorrento','http://www.sorrento-centre.bc.ca/',2,'media/sorrento.jpg'],
+					['PWRDF','http://pwrdf.org/',1,'media/pwrdf.gif'],
+					['Camp Artaban','http://www.campartaban.com/',2,'media/artaban.jpg'],
+					['Topic & Anglican Journal Subscriptions','http://www.anglicanjournal.com/subscription.html',0,'media/logo.png'],
+					['Communicating to Connect','http://www.cassonandchoi.com/marriageprep/',2,'media/commconn.png'],
+					['DNW Archives','http://www.anglicanarchivesvancouver.com/',0,'media/archives.png'],
+					['BCYAYM','http://bcyaym.wordpress.com/',3,'media/bcaym.jpg'],
+					['The Good Steward','http://thegoodsteward.ca/',0,'media/logo.png'],
+					['EfM Canada','http://www.efmcanada.ca/',3,'media/efm.jpg'],
+					['Holiday Services','http://holidayservices.ca/',0,'media/lentencross.jpg'],
+					['Truth and Reconciliation','http://trc.ca',3,'media/trc.jpg'],
+					['same sex blessings','http://www.samesexblessing.info/',0,'media/marriage.jpg'],
+					['Lectionary','http://thecommunity.anglican.ca/lectionary/',4,'media/acc.jpg'],
+					['Our Canons','http://vancouver.anglican.ca/portals/0/repositoRy/CanonsandregulationsSeptember2012.pdf',0,'media/logo.png']];
+				// html="<table width='90%' border='1'>";
+				html="<div style='font-size:8pt; font-family:arial; color:white;'><table border='0'>";
+				for (var i = 0; i < linksList.length; i++) {
+					console.log(i%4,linksList[i][0],linksList[i][3]);
+				//			html+=linksList[i][0]+"<br /><a href='"+linksList[i][1]+"'><img width='22%' src='"+linksList[i][3]+"'/></a><br/>";			
+				
+					if(i%4==0) // td bgcolor=linksList[i][2]
+						html+="<tr height='12%'><td bgcolor="+tdBg[linksList[i][2]]+" width='19%'>"+linksList[i][0]+"<br /><a class='btn0' href='"+linksList[i][1]+"'onClick='javascript:return openExt(this)'><img width='80%' src='"+linksList[i][3]+"'/></a></td>";
+				//				console.log('first');
+					
+					else if((i%4==3)||(i==linksList.length-1))
+						html+="<td width='19%' bgcolor="+tdBg[linksList[i][2]]+">"+linksList[i][0]+"<br /><a class='btn0' href='"+linksList[i][1]+"'onClick='javascript:return openExt(this)'><img  width='80%' src='"+linksList[i][3]+"'/></a></td></tr>";
+				//				console.log('last');
+					
+					else
+						html+="<td width='19%' bgcolor="+tdBg[linksList[i][2]]+">"+linksList[i][0]+"<br /><a class='btn0' href='"+linksList[i][1]+"' onClick='javascript:return openExt(this)'><img  width='80%' src='"+linksList[i][3]+"'/></a></td>";
+				//				console.log('mid');
+
+				}
+				html+="</table>";
+				var el = document.getElementById("content");
+				el.innerHTML = html;
+			}
+			function showLocation(){
+				//<!--img id="map" src="https://maps.googleapis.com/maps/api/staticmap?center=Palo Alto, CA&amp;zoom=10&amp;size=288x200&amp;markers=Stanford Stadium&amp;markers=Apigee Corporation, Palo Alto&amp;sensor=false" width="288" height="200"-->class='btn0' 
+				alert("Location - not yet implemented");
+			}
+			function showNews(){
+				alert("News- not yet implemented");
+			}
+			function showEvents(){
+				alert("Events - not yet implemented");
+			}
+		</script>
+<!--script type="text/javascript" src="../../jquery.mobile-1.2.1.min.js"></script-->
+</body>
+</html>
