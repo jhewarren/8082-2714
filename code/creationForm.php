@@ -1,5 +1,5 @@
 <?php
-    include_once 'includes/dbconnect.php';
+include_once 'includes/dbconnect.php';
 ?>
 
 <!DOCTYPE html>
@@ -13,8 +13,13 @@
     <script src="main.js"></script>
 </head>
 <body>
+
+    <h3>Store Creation</h3>
+    <a href = "./index.php">
+        <button>Home</button>
+    </a>
+
     <form method = "POST" action = "./creation.php">
-        <h3>Store Creation</h3>
         <p>Store Name <input type = "text" id = "sName" name = "sName" placeholder = "Store Name"></p>
         <p>Store Phone <input type = "text" id = "sPhone" name = "sPhone" placeholder = "Store Phone"></p>
         <p>Store Entrance <input type = "text" id = "sEntrance" name = "sEntrance" placeholder = "Store Entrance"></p>
