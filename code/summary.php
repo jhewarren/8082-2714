@@ -21,7 +21,10 @@
     $query = $parse['query'];
 
     $storeDetails = mysqli_real_escape_string($conn, $query);
-    $sql = "SELECT * FROM stores WHERE sName LIKE '$storeDetails%';";
+    $sql = "SELECT s.sName, s.sPhone, s.sEntrance, s.sURL, s.sTwitter, s.sFacebook, s.sInstagram, s.sLocation, s.sAbout, s.sComing, h.hHours
+    FROM stores s
+    inner join hours h on s.hid=h.hid
+    order by s.sName;";
     $result = mysqli_query($conn, $sql);
     $queryResults = mysqli_num_rows($result);
 
@@ -33,7 +36,7 @@
                 <p>".$row['sPhone']."</p>
                 <p>".$row['sLocation']."</p>
                 <p>".$row['sAbout']."</p>
-                <p>".$row['sHours']."</p>
+                <p>".$row['hHours']."</p>
                 <p>Facebook: ".$row['sFacebook']."</p>
                 <p>Twitter: ".$row['sTwitter']."</p>
                 <p>Instagram: ".$row['sInstagram']."</p>
