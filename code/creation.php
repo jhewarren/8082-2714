@@ -31,7 +31,7 @@
             $About = mysqli_real_escape_string($conn, $_POST['sAbout']);
             $Coming = mysqli_real_escape_string($conn, $_POST['sComing']);
             $Hours = mysqli_real_escape_string($conn, $_POST['sHours']);
-            $sql = "INSERT INTO stores (sName, sPhone, sEntrance, sURL, sTwitter, sFacebook, sInstagram, sLocation, sAbout, sComing, sHours) VALUES ('$search', '$phone', '$entrance', '$URL', '$Twitter', '$Facebook', '$Instagram', '$Location', '$About', '$Coming', '$Hours');";
+            $sql = "INSERT INTO `stores`(`sName`, `sPhone`, `sEntrance`, `sURL`, `sTwitter`, `sFacebook`, `sInstagram`, `sLocation`, `sAbout`, `sComing`, `hID`) VALUES ('$search', '$phone', '$entrance', '$URL', '$Twitter', '$Facebook', '$Instagram', '$Location', '$About', '$Coming', '$Hours');";
             $result = mysqli_query($conn, $sql);
 
             if ($result > 0) {

@@ -21,10 +21,10 @@
         $update_store_phone = mysqli_real_escape_string($conn, $_POST['update-store-phone']);
         $update_store_location = mysqli_real_escape_string($conn, $_POST['update-store-location']);
 
-        $old_store = $_POST['current-store-name'];
+        $old_store = $_POST['current-store-id'];
 
         if ($update_store_name != '') { 
-            $sql_name = "UPDATE stores SET sName = '$update_store_name' WHERE sName LIKE '$old_store%';";
+            $sql_name = "UPDATE stores SET sName = '$update_store_name' WHERE sID = '$old_store%';";
             if (mysqli_query($conn, $sql_name)) {
                 echo "Store name update successfully for testing...<br>";
             } else {
@@ -32,7 +32,7 @@
             }
         }
         if ($update_store_about != '') { 
-            $sql_store = "UPDATE stores SET sAbout = '$update_store_about' WHERE sName LIKE '$old_store%';";
+            $sql_store = "UPDATE stores SET sAbout = '$update_store_about' WHERE sID = '$old_store%';";
             if (mysqli_query($conn, $sql_store)) {
                 echo "Store about update successfully for testing...<br>";
             } else {
@@ -41,7 +41,7 @@
         }
 
         if ($update_store_phone != '') { 
-            $sql_phone = "UPDATE stores SET sPhone = '$update_store_phone' WHERE sName LIKE '$old_store%';";
+            $sql_phone = "UPDATE stores SET sPhone = '$update_store_phone' WHERE sID = '$old_store%';";
             if (mysqli_query($conn, $sql_phone)) {
                 echo "Store phone update successfully for testing...<br>";
             } else {
@@ -50,7 +50,7 @@
         }
 
         if ($update_store_location != '') { 
-            $sql_location = "UPDATE stores SET sLocation = '$update_store_location' WHERE sName LIKE '$old_store%';";
+            $sql_location = "UPDATE stores SET sLocation = '$update_store_location' WHERE sID LIKE '$old_store%';";
             if (mysqli_query($conn, $sql_location)) {
                 echo "Store location update successfully for testing...<br>";
             } else {

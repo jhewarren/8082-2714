@@ -20,17 +20,20 @@
     $parse = parse_url($url);
     $query = $parse['query'];
 
-    $storeDetails = mysqli_real_escape_string($conn, $query);
-    $sql = "SELECT s.sName, s.sPhone, s.sEntrance, s.sURL, s.sTwitter, s.sFacebook, s.sInstagram, s.sLocation, s.sAbout, s.sComing, h.hHours
-    FROM stores s
-    inner join hours h on s.hid=h.hid
-    order by s.sName;";
+    $storeID = mysqli_real_escape_string($conn, $query);
+    /*
+    $sql = "SELECT * FROM stores WHERE sName LIKE '$storeID%';";
+    */
+    $sql = "SELECT s.sName, s.sPhone, s.sEntrance, s.sURL, s.sTwitter, s.sFacebook, s.sInstagram, s.sLocation, s.sAbout, s.sComing, h.hHours, s.sID
+        FROM stores s
+        inner join hours h on s.hID=h.hID 
+        WHERE sID LIKE '$storeID'";
     $result = mysqli_query($conn, $sql);
     $queryResults = mysqli_num_rows($result);
 
     if ($queryResults > 0) {
         $row = mysqli_fetch_assoc($result);
-        $currentStorePage = $row['sName'];
+        $currentStoreID = $row['sID'];
             echo "<div>
                 <h3>".$row['sName']."</h3>
                 <p>".$row['sPhone']."</p>
@@ -47,12 +50,13 @@
     }
 
     if(array_key_exists('delete-row', $_POST)) {
-        deleteRow($storeDetails, $conn);
+        deleteRow($storeID, $conn);
     }
-    function deleteRow($storeDetails, $conn) 
+    function deleteRow($storeID, $conn) 
     {
-        $deleteName = $storeDetails;
-        $deletesql = "DELETE FROM stores WHERE sName = '$deleteName';";
+        $deleteID = $storeID
+;
+        $deletesql = "DELETE FROM stores WHERE sID = '$deleteID';";
         $delresults = mysqli_query($conn, $deletesql);
         if($delresults == 1) {
             header("Location: ./index.php");
@@ -62,7 +66,7 @@
 
 <form action = "./update_data.php" id="update-form" method = "POST">
     <h4>Store Update</h4>
-    <input type = "hidden" name = "current-store-name" value = <?php echo $currentStorePage ?>>
+    <input type = "hidden" name = "current-store-id" value = <?php echo $currentStoreID ?>>
 
     <p>Store Name: 
         <input type = "text" name = "update-store-name" placeholder = "Update store name here">
