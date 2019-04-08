@@ -1,7 +1,11 @@
 # 8082-2714
 This application is basically a proof of concept for a Web App listing stores within a mall.  It was intended as a project for a team with resources at both ends of the BCIT SCAS curriculum.
 
-Leading the team was an individual in the final year of the Degree program, and taking a Project Management course as part of the regular curriculum.  The development resources were individuals in their first year of the diploma program and taking a Database course as part of their curriculum.  There was no infrastructure provided to accomodate this solution.  The Project Manager had to use the tools that were available.  There was a stipulation, however, that Trello be used to manage the tasks.  Xampp was the development platform given its stability and relative ease of use.
+Leading the team was an individual in the final year of the Degree program, and taking a Project Management course as part of the regular curriculum.  The development resources were individuals in their first year of the diploma program and taking a Database course as part of their curriculum.  
+
+The Project Objective was to develop a solution that would allow the development team to experience working with a database in a realistic solution.  Our solution would allow the user to interact with a mall listing instance. Our MVP consisted of implementing full CRUD functionality on a Normalized database using a browser as opposed to some direct form of interacting with the database directly (phpMyAdmin, e.g.).  We used Tsawassen Mills in our instance.
+
+There was no infrastructure provided to accomodate this solution.  The Project Manager had to use the tools that were available.  There was a stipulation, however, that Trello be used to manage the tasks.  Xampp was the development platform given its stability and relative ease of use.
 
 The contents of this project are the fruits of that solutionw.
 
