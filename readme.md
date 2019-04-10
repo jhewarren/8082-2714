@@ -13,7 +13,7 @@ In the 'refs' folder is a copy of the spreadsheet used to plan and implement the
 
 In the 'code' folder are the working php files to interact with the database.
 
-Running this application;
+Running this application;  
 1 - clone the project  
 2 - install Xampp (remember where this is installed ***)  
 3 - create a database  
